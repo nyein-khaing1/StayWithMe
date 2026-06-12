@@ -1,0 +1,22 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StayWithMe.CharacterPage"
+             BackgroundColor="#FFF5F7">
+
+    <VerticalStackLayout Padding="20" Spacing="18">
+
+        <Label Text="Choose Your Boyfriend"
+               FontSize="28"
+               FontAttributes="Bold"
+               TextColor="#C2185B"/>
+
+        <Button Text="Ethan - Soft &amp; Caring"
+        Clicked="OnEthanClicked"/>
+
+        <Button Text="Leo - Confident &amp; Playful"
+        Clicked="OnLeoClicked"/>
+
+        <Button Text="Noah - Calm &amp; Mature"
+        Clicked="OnNoahClicked"/>
+    </VerticalStackLayout>
+</ContentPage>

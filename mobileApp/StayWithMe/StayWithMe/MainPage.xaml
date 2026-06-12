@@ -1,0 +1,78 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StayWithMe.MainPage"
+             BackgroundColor="#FFF5F7">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="16">
+
+        <Border Grid.Row="0"
+        BackgroundColor="#FFFFFF"
+        Stroke="#FFD1DC"
+        StrokeThickness="1"
+        Padding="15"
+        StrokeShape="RoundRectangle 20">
+
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+
+                <Label Grid.Column="0"
+               Text="💕"
+               FontSize="32"/>
+
+                <VerticalStackLayout Grid.Column="1">
+                    <Label Text="StayWithMe"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   TextColor="#C2185B"/>
+
+                    <Label x:Name="OnlineLabel"
+                   Text="Online now"
+                   FontSize="14"
+                   TextColor="#777777"/>
+                </VerticalStackLayout>
+
+                <Button Grid.Column="2"
+                Text="Change"
+                BackgroundColor="#FFE1EC"
+                TextColor="#C2185B"
+                CornerRadius="15"
+                Padding="10,5"
+                Clicked="OnChangeCharacterClicked"/>
+            </Grid>
+        </Border>
+
+        <ScrollView Grid.Row="1"
+                    x:Name="ChatScroll">
+            <VerticalStackLayout x:Name="ChatContainer"
+                                 Spacing="10"
+                                 Padding="0,20,0,20"/>
+        </ScrollView>
+
+        <Border Grid.Row="2"
+                BackgroundColor="White"
+                Stroke="#FFD1DC"
+                StrokeThickness="1"
+                Padding="8"
+                StrokeShape="RoundRectangle 25">
+
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+
+                <Entry x:Name="UserInput"
+                       Placeholder="Message Ethan..."
+                       ReturnType="Send"
+                       Completed="OnUserInputCompleted"
+                       BackgroundColor="Transparent"
+                       TextColor="Black"
+                       PlaceholderColor="#999999"/>
+
+                <Button Grid.Column="1"
+                        Text="Send"
+                        BackgroundColor="#C2185B"
+                        TextColor="White"
+                        CornerRadius="20"
+                        Padding="18,8"
+                        Clicked="OnSendClicked"/>
+            </Grid>
+        </Border>
+
+    </Grid>
+</ContentPage>
