@@ -1,4 +1,6 @@
 ﻿using Microsoft.Maui.Controls.Shapes;
+using Microsoft.Maui.Graphics;
+using System.Diagnostics;
 
 namespace StayWithMe;
 
@@ -35,14 +37,16 @@ public partial class MainPage : ContentPage
         Loaded += OnPageLoaded;
     }
 
-    private async void OnPageLoaded(object? sender, EventArgs e)
+    private void OnPageLoaded(
+        object? sender,
+        EventArgs e)
     {
         if (_openingMessageAdded)
             return;
 
         _openingMessageAdded = true;
 
-        await AddMessageAsync(
+        AddMessage(
             _characterName,
             GetOpeningMessage()
         );
@@ -68,7 +72,10 @@ public partial class MainPage : ContentPage
         InputBorder.Stroke = theme;
         SendButton.BackgroundColor = theme;
 
-        TypingLabel.Text = $"{_characterName} is typing...";
+        TypingLabel.Text =
+            $"{_characterName} is typing...";
+
+        TypingLabel.IsVisible = false;
     }
 
     private string GetPersonality()
@@ -100,69 +107,112 @@ public partial class MainPage : ContentPage
         };
     }
 
-    private async void OnSendClicked(object sender, EventArgs e)
+    private async void OnSendClicked(
+        object sender,
+        EventArgs e)
     {
-        await SendMessageAsync();
+        Debug.WriteLine("SEND BUTTON CLICKED");
+
+        await SendCurrentMessageAsync();
     }
 
-    private async void OnUserInputCompleted(object sender, EventArgs e)
+    private async void OnUserInputCompleted(
+        object sender,
+        EventArgs e)
     {
-        await SendMessageAsync();
+        Debug.WriteLine("ENTER KEY PRESSED");
+
+        await SendCurrentMessageAsync();
     }
 
-    private async Task SendMessageAsync()
+    private async Task SendCurrentMessageAsync()
     {
         if (_isSending)
-            return;
+        {
+            Debug.WriteLine(
+                "Message ignored because another message is sending."
+            );
 
-        string message = UserInput.Text?.Trim() ?? "";
+            return;
+        }
+
+        string message =
+            UserInput.Text?.Trim() ?? string.Empty;
 
         if (string.IsNullOrWhiteSpace(message))
+        {
+            Debug.WriteLine(
+                "Message ignored because it is empty."
+            );
+
             return;
+        }
 
         _isSending = true;
-        SendButton.IsEnabled = false;
+
+        UserInput.Text = string.Empty;
         UserInput.IsEnabled = false;
+        SendButton.IsEnabled = false;
 
-        UserInput.Text = "";
+        AddMessage("You", message);
 
-        await AddMessageAsync("You", message);
+        TypingLabel.Text =
+            $"{_characterName} is typing...";
 
         TypingLabel.IsVisible = true;
 
         try
         {
-            string reply = await _chatService.SendMessageAsync(
-                _characterId,
-                message
+            Debug.WriteLine("CALLING FASTAPI NOW");
+            Debug.WriteLine(
+                $"Character ID: {_characterId}"
+            );
+            Debug.WriteLine(
+                $"User message: {message}"
+            );
+
+            string reply =
+                await _chatService.SendMessageAsync(
+                    _characterId,
+                    message
+                );
+
+            Debug.WriteLine(
+                $"MAIN PAGE RECEIVED: {reply}"
             );
 
             TypingLabel.IsVisible = false;
 
-            await AddMessageAsync(
+            AddMessage(
                 _characterName,
                 reply
             );
         }
         catch (Exception ex)
         {
+            Debug.WriteLine(
+                $"CHAT REQUEST FAILED: {ex}"
+            );
+
             TypingLabel.IsVisible = false;
 
-            await AddMessageAsync(
+            AddMessage(
                 _characterName,
-                $"I couldn’t reply just now. {ex.Message}"
+                $"Connection error: {ex.Message}"
             );
         }
         finally
         {
             _isSending = false;
-            SendButton.IsEnabled = true;
+
             UserInput.IsEnabled = true;
+            SendButton.IsEnabled = true;
+
             UserInput.Focus();
         }
     }
 
-    private async Task AddMessageAsync(
+    private void AddMessage(
         string sender,
         string message)
     {
@@ -189,21 +239,20 @@ public partial class MainPage : ContentPage
             LineBreakMode = LineBreakMode.WordWrap
         };
 
-        var messageContent = new VerticalStackLayout
-        {
-            Spacing = 4,
-            Children =
+        var messageContent =
+            new VerticalStackLayout
             {
-                senderLabel,
-                messageLabel
-            }
-        };
+                Spacing = 4
+            };
+
+        messageContent.Children.Add(senderLabel);
+        messageContent.Children.Add(messageLabel);
 
         var bubble = new Border
         {
             BackgroundColor = isUser
                 ? theme
-                : Color.FromArgb("#F9FFFFFF"),
+                : Colors.White,
 
             Stroke = isUser
                 ? theme
@@ -214,26 +263,67 @@ public partial class MainPage : ContentPage
 
             StrokeShape = new RoundRectangle
             {
-                CornerRadius = 21
+                CornerRadius = 20
             },
 
-            HorizontalOptions = isUser
-                ? LayoutOptions.End
-                : LayoutOptions.Start,
-
-            MaximumWidthRequest = 455,
+            MaximumWidthRequest = 440,
             Content = messageContent
         };
 
-        ChatContainer.Children.Add(bubble);
+        if (isUser)
+        {
+            bubble.HorizontalOptions =
+                LayoutOptions.End;
 
-        await Task.Delay(70);
+            ChatContainer.Children.Add(bubble);
 
-        await ChatScroll.ScrollToAsync(
-            ChatContainer,
-            ScrollToPosition.End,
-            true
-        );
+            return;
+        }
+
+        Image avatar = CreateMessageAvatar();
+
+        var replyRow =
+            new HorizontalStackLayout
+            {
+                Spacing = 10,
+                HorizontalOptions =
+                    LayoutOptions.Start,
+
+                VerticalOptions =
+                    LayoutOptions.Start,
+
+                MaximumWidthRequest = 510
+            };
+
+        bubble.HorizontalOptions =
+            LayoutOptions.Start;
+
+        replyRow.Children.Add(avatar);
+        replyRow.Children.Add(bubble);
+
+        ChatContainer.Children.Add(replyRow);
+    }
+
+    private Image CreateMessageAvatar()
+    {
+        var avatar = new Image
+        {
+            Source = _avatarImage,
+            WidthRequest = 42,
+            HeightRequest = 42,
+            Aspect = Aspect.AspectFill,
+            VerticalOptions = LayoutOptions.Start,
+            HorizontalOptions = LayoutOptions.Start
+        };
+
+        avatar.Clip = new EllipseGeometry
+        {
+            Center = new Point(21, 21),
+            RadiusX = 21,
+            RadiusY = 21
+        };
+
+        return avatar;
     }
 
     private async void OnChangeCharacterClicked(

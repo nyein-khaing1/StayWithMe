@@ -1,44 +1,98 @@
-﻿using System.Net.Http.Json;
+﻿using System.Diagnostics;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace StayWithMe;
 
 public class ChatService
 {
-    private readonly HttpClient _httpClient = new HttpClient
+    private readonly HttpClient _httpClient;
+
+    public ChatService()
     {
-        BaseAddress = new Uri("http://127.0.0.1:8000")
-    };
+        // Use Windows Machine while developing the desktop version.
+        _httpClient = new HttpClient
+        {
+            BaseAddress = new Uri("http://127.0.0.1:8000"),
+            Timeout = TimeSpan.FromSeconds(120)
+        };
 
-    public async Task<string> SendMessageAsync(string characterId, string message)
+        Debug.WriteLine(
+            "ChatService created: http://127.0.0.1:8000"
+        );
+    }
+
+    public async Task<string> SendMessageAsync(
+        string characterId,
+        string message)
     {
-        try
+        var requestData = new
         {
-            var request = new
-            {
-                character_id = characterId,
-                message = message
-            };
+            character_id = characterId,
+            message
+        };
 
-            var response = await _httpClient.PostAsJsonAsync("/chat", request);
+        string requestJson =
+            JsonSerializer.Serialize(requestData);
 
-            if (!response.IsSuccessStatusCode)
-            {
-                string error = await response.Content.ReadAsStringAsync();
-                return $"Backend error: {response.StatusCode} - {error}";
-            }
+        Debug.WriteLine(
+            $"CHAT SERVICE REQUEST: {requestJson}"
+        );
 
-            var result = await response.Content.ReadFromJsonAsync<ChatResponse>();
+        using var content = new StringContent(
+            requestJson,
+            Encoding.UTF8,
+            "application/json"
+        );
 
-            return result?.reply ?? "I’m here with you.";
-        }
-        catch (Exception ex)
+        using HttpResponseMessage response =
+            await _httpClient.PostAsync("/chat", content);
+
+        string rawResponse =
+            await response.Content.ReadAsStringAsync();
+
+        Debug.WriteLine(
+            $"CHAT SERVICE STATUS: {(int)response.StatusCode}"
+        );
+
+        Debug.WriteLine(
+            $"CHAT SERVICE RESPONSE: {rawResponse}"
+        );
+
+        if (!response.IsSuccessStatusCode)
         {
-            return "Connection error: " + ex.Message;
+            throw new HttpRequestException(
+                $"FastAPI returned {(int)response.StatusCode}: " +
+                rawResponse
+            );
         }
+
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+
+        ChatResponse? result =
+            JsonSerializer.Deserialize<ChatResponse>(
+                rawResponse,
+                options
+            );
+
+        if (result is null ||
+            string.IsNullOrWhiteSpace(result.Reply))
+        {
+            throw new InvalidOperationException(
+                "FastAPI returned an empty reply."
+            );
+        }
+
+        return result.Reply;
     }
 }
 
 public class ChatResponse
 {
-    public string reply { get; set; } = "";
+    [JsonPropertyName("reply")]
+    public string Reply { get; set; } = string.Empty;
 }

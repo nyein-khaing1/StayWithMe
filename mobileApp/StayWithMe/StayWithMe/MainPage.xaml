@@ -6,49 +6,59 @@
 
     <Grid>
 
-        <!-- Full desktop background -->
+        <!-- Full-screen character background -->
         <Image x:Name="ChatBackgroundImage"
                Aspect="AspectFill"
                HorizontalOptions="Fill"
                VerticalOptions="Fill"/>
 
-        <!-- Light overlay so the interface stays readable -->
-        <BoxView Color="Black"
+        <!-- Subtle dark layer for readability -->
+        <BoxView Color="#000000"
                  Opacity="0.08"/>
 
-        <Grid Padding="28"
-              RowDefinitions="Auto,*">
+        <!-- Main desktop layout -->
+        <Grid Padding="26"
+              ColumnDefinitions="*,620"
+              RowDefinitions="Auto,*"
+              ColumnSpacing="26"
+              RowSpacing="18">
 
-            <!-- Top navigation header -->
+            <!-- Back button over the character area -->
+            <Button Grid.Row="0"
+                    Grid.Column="0"
+                    Text="←"
+                    FontSize="27"
+                    WidthRequest="56"
+                    HeightRequest="56"
+                    Padding="0"
+                    HorizontalOptions="Start"
+                    BackgroundColor="#EFFFFFFF"
+                    TextColor="#25202A"
+                    CornerRadius="28"
+                    Clicked="OnChangeCharacterClicked"/>
+
+            <!-- Top chat header -->
             <Border x:Name="HeaderBorder"
                     Grid.Row="0"
-                    HeightRequest="84"
-                    Padding="16,10"
-                    BackgroundColor="#F4FFFFFF"
+                    Grid.Column="1"
+                    HeightRequest="82"
+                    Padding="14,10"
+                    BackgroundColor="#F2FFFFFF"
                     Stroke="#DDFFFFFF"
                     StrokeThickness="1"
-                    StrokeShape="RoundRectangle 26">
+                    StrokeShape="RoundRectangle 25">
 
-                <Grid ColumnDefinitions="Auto,Auto,*,Auto"
-                      ColumnSpacing="14">
+                <Grid ColumnDefinitions="Auto,*,Auto"
+                      ColumnSpacing="13">
 
-                    <Button Grid.Column="0"
-                            Text="←"
-                            FontSize="27"
-                            WidthRequest="54"
-                            HeightRequest="54"
-                            Padding="0"
-                            BackgroundColor="#22FFFFFF"
-                            TextColor="#25202A"
-                            CornerRadius="27"
-                            Clicked="OnChangeCharacterClicked"/>
-
-                    <!-- Circular character avatar -->
-                    <Image Grid.Column="1"
-                           x:Name="AvatarImage"
+                    <!-- Small face-only avatar -->
+                    <Image x:Name="AvatarImage"
+                           Grid.Column="0"
                            WidthRequest="58"
                            HeightRequest="58"
-                           Aspect="AspectFill">
+                           Aspect="AspectFill"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
 
                         <Image.Clip>
                             <EllipseGeometry Center="29,29"
@@ -57,8 +67,8 @@
                         </Image.Clip>
                     </Image>
 
-                    <VerticalStackLayout Grid.Column="2"
-                                         Spacing="1"
+                    <VerticalStackLayout Grid.Column="1"
+                                         Spacing="2"
                                          VerticalOptions="Center">
 
                         <Label x:Name="NameLabel"
@@ -66,6 +76,7 @@
                                FontAttributes="Bold"/>
 
                         <HorizontalStackLayout Spacing="6">
+
                             <Ellipse WidthRequest="9"
                                      HeightRequest="9"
                                      Fill="#19AF67"
@@ -73,136 +84,185 @@
 
                             <Label Text="Online now"
                                    FontSize="13"
-                                   TextColor="#5C5360"/>
+                                   TextColor="#5C5360"
+                                   VerticalOptions="Center"/>
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
 
-                    <Button Grid.Column="3"
+                    <Button Grid.Column="2"
                             Text="Change character"
-                            Padding="20,10"
-                            BackgroundColor="#22FFFFFF"
+                            Padding="18,9"
+                            VerticalOptions="Center"
+                            BackgroundColor="#18FFFFFF"
                             TextColor="#352E38"
+                            FontSize="14"
                             CornerRadius="20"
                             Clicked="OnChangeCharacterClicked"/>
 
                 </Grid>
             </Border>
 
-            <!-- Desktop body: character visible left, chat on right -->
-            <Grid Grid.Row="1"
-                  Margin="0,20,0,0"
-                  ColumnDefinitions="*,600"
-                  ColumnSpacing="28">
+            <!-- Character information floating over background -->
+            <Border Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="0,0,0,20"
+                    Padding="14"
+                    WidthRequest="310"
+                    HorizontalOptions="Start"
+                    VerticalOptions="End"
+                    BackgroundColor="#DFFFFFFF"
+                    Stroke="#AFFFFFFF"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 24">
 
-                <!-- Empty left side deliberately reveals character -->
-                <Grid Grid.Column="0"/>
+                <Grid ColumnDefinitions="Auto,*"
+                      ColumnSpacing="12">
 
-                <!-- Chat glass panel -->
-                <Border Grid.Column="1"
-                        Padding="20"
-                        BackgroundColor="#EDFFFFFF"
-                        Stroke="#CCFFFFFF"
-                        StrokeThickness="1"
-                        StrokeShape="RoundRectangle 30">
+                    <Image x:Name="ChatAvatarImage"
+                           Grid.Column="0"
+                           WidthRequest="64"
+                           HeightRequest="64"
+                           Aspect="AspectFill"
+                           VerticalOptions="Center">
 
-                    <Grid RowDefinitions="Auto,*,Auto,Auto"
-                          RowSpacing="12">
+                        <Image.Clip>
+                            <EllipseGeometry Center="32,32"
+                                             RadiusX="32"
+                                             RadiusY="32"/>
+                        </Image.Clip>
+                    </Image>
 
-                        <!-- Character details inside chat -->
-                        <Border Grid.Row="0"
-                                Padding="14"
-                                BackgroundColor="#BFFFFFFF"
-                                StrokeThickness="0"
-                                StrokeShape="RoundRectangle 22">
+                    <VerticalStackLayout Grid.Column="1"
+                                         Spacing="3"
+                                         VerticalOptions="Center">
 
-                            <Grid ColumnDefinitions="66,*"
-                                  ColumnSpacing="12">
+                        <Label x:Name="CharacterNameLabel"
+                               FontSize="23"
+                               FontAttributes="Bold"/>
 
-                                <Image x:Name="ChatAvatarImage"
-                                       WidthRequest="60"
-                                       HeightRequest="60"
-                                       Aspect="AspectFill">
+                        <Label x:Name="PersonalityLabel"
+                               FontSize="14"
+                               TextColor="#625865"
+                               LineBreakMode="WordWrap"/>
+                    </VerticalStackLayout>
 
-                                    <Image.Clip>
-                                        <EllipseGeometry Center="30,30"
-                                                         RadiusX="30"
-                                                         RadiusY="30"/>
-                                    </Image.Clip>
-                                </Image>
+                </Grid>
+            </Border>
 
-                                <VerticalStackLayout Grid.Column="1"
-                                                     VerticalOptions="Center"
-                                                     Spacing="2">
+            <!-- Main chat panel -->
+            <Border Grid.Row="1"
+                    Grid.Column="1"
+                    Padding="20"
+                    BackgroundColor="#EEFFFFFF"
+                    Stroke="#CCFFFFFF"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 30">
 
-                                    <Label x:Name="CharacterNameLabel"
-                                           FontSize="22"
-                                           FontAttributes="Bold"/>
+                <Grid RowDefinitions="Auto,*,Auto,Auto"
+                      RowSpacing="12">
 
-                                    <Label x:Name="PersonalityLabel"
-                                           FontSize="14"
-                                           TextColor="#625865"/>
-                                </VerticalStackLayout>
+                    <!-- Chat title -->
+                    <Border Grid.Row="0"
+                            Padding="13"
+                            BackgroundColor="#AFFFFFFF"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 21">
 
-                            </Grid>
-                        </Border>
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="12">
 
-                        <!-- Messages -->
-                        <ScrollView Grid.Row="1"
-                                    x:Name="ChatScroll">
+                            <Image WidthRequest="48"
+                                   HeightRequest="48"
+                                   Source="{Binding Source={x:Reference ChatAvatarImage},
+                                                    Path=Source}"
+                                   Aspect="AspectFill"
+                                   VerticalOptions="Center">
 
-                            <VerticalStackLayout x:Name="ChatContainer"
-                                                 Padding="2,8"
-                                                 Spacing="12"/>
-                        </ScrollView>
+                                <Image.Clip>
+                                    <EllipseGeometry Center="24,24"
+                                                     RadiusX="24"
+                                                     RadiusY="24"/>
+                                </Image.Clip>
+                            </Image>
 
-                        <!-- Typing status -->
-                        <Label Grid.Row="2"
-                               x:Name="TypingLabel"
-                               IsVisible="False"
-                               FontSize="13"
-                               FontAttributes="Italic"
-                               TextColor="#665E69"
-                               Margin="8,0"/>
+                            <VerticalStackLayout Grid.Column="1"
+                                                 Spacing="1"
+                                                 VerticalOptions="Center">
 
-                        <!-- Message input -->
-                        <Border Grid.Row="3"
-                                x:Name="InputBorder"
-                                Padding="7"
-                                BackgroundColor="White"
-                                StrokeThickness="2"
-                                StrokeShape="RoundRectangle 28">
+                                <Label Text="{Binding Source={x:Reference CharacterNameLabel},
+                                                      Path=Text}"
+                                       FontSize="20"
+                                       FontAttributes="Bold"
+                                       TextColor="{Binding Source={x:Reference CharacterNameLabel},
+                                                           Path=TextColor}"/>
 
-                            <Grid ColumnDefinitions="*,Auto"
-                                  ColumnSpacing="8">
+                                <Label Text="{Binding Source={x:Reference PersonalityLabel},
+                                                      Path=Text}"
+                                       FontSize="13"
+                                       TextColor="#625865"/>
+                            </VerticalStackLayout>
 
-                                <Entry x:Name="UserInput"
-                                       Placeholder="Type a message..."
-                                       PlaceholderColor="#A49AA7"
-                                       TextColor="#2C2730"
-                                       FontSize="16"
-                                       ReturnType="Send"
-                                       Completed="OnUserInputCompleted"
-                                       BackgroundColor="Transparent"
-                                       Margin="10,0"/>
+                        </Grid>
+                    </Border>
 
-                                <Button Grid.Column="1"
-                                        x:Name="SendButton"
-                                        Text="➤"
-                                        FontSize="21"
-                                        WidthRequest="50"
-                                        HeightRequest="50"
-                                        Padding="0"
-                                        TextColor="White"
-                                        CornerRadius="25"
-                                        Clicked="OnSendClicked"/>
-                            </Grid>
-                        </Border>
+                    <!-- Conversation messages -->
+                    <ScrollView x:Name="ChatScroll"
+                                Grid.Row="1"
+                                VerticalScrollBarVisibility="Default">
 
-                    </Grid>
-                </Border>
+                        <VerticalStackLayout x:Name="ChatContainer"
+                                             Padding="2,8,4,8"
+                                             Spacing="13"/>
+                    </ScrollView>
 
-            </Grid>
+                    <!-- Typing indicator -->
+                    <Label x:Name="TypingLabel"
+                           Grid.Row="2"
+                           IsVisible="False"
+                           Margin="8,0"
+                           FontSize="13"
+                           FontAttributes="Italic"
+                           TextColor="#665E69"/>
+
+                    <!-- Message input -->
+                    <Border x:Name="InputBorder"
+                            Grid.Row="3"
+                            Padding="7"
+                            BackgroundColor="#FAFFFFFF"
+                            StrokeThickness="2"
+                            StrokeShape="RoundRectangle 29">
+
+                        <Grid ColumnDefinitions="*,Auto"
+                              ColumnSpacing="8">
+
+                            <Entry x:Name="UserInput"
+                                   Grid.Column="0"
+                                   Placeholder="Type a message..."
+                                   PlaceholderColor="#A49AA7"
+                                   TextColor="#2C2730"
+                                   FontSize="16"
+                                   ReturnType="Send"
+                                   Completed="OnUserInputCompleted"
+                                   BackgroundColor="Transparent"
+                                   Margin="12,0"/>
+
+                            <Button x:Name="SendButton"
+                                    Grid.Column="1"
+                                    Text="➤"
+                                    FontSize="21"
+                                    WidthRequest="50"
+                                    HeightRequest="50"
+                                    Padding="0"
+                                    TextColor="White"
+                                    CornerRadius="25"
+                                    Clicked="OnSendClicked"/>
+
+                        </Grid>
+                    </Border>
+
+                </Grid>
+            </Border>
+
         </Grid>
-
     </Grid>
 </ContentPage>
