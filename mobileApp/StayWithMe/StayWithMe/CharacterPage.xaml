@@ -1,22 +1,228 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StayWithMe.CharacterPage"
-             BackgroundColor="#FFF5F7">
+             BackgroundColor="#FFF7F9">
 
-    <VerticalStackLayout Padding="20" Spacing="18">
+    <ScrollView>
+        <VerticalStackLayout Padding="30,24,30,35"
+                             Spacing="24"
+                             HorizontalOptions="Center">
 
-        <Label Text="Choose Your Boyfriend"
-               FontSize="28"
-               FontAttributes="Bold"
-               TextColor="#C2185B"/>
+            <!-- Header -->
+            <VerticalStackLayout Spacing="6"
+                                 HorizontalOptions="Center">
 
-        <Button Text="Ethan - Soft &amp; Caring"
-        Clicked="OnEthanClicked"/>
+                <Label Text="StayWithMe"
+                       FontSize="52"
+                       FontAttributes="Bold"
+                       TextColor="#EA3975"
+                       HorizontalTextAlignment="Center"/>
 
-        <Button Text="Leo - Confident &amp; Playful"
-        Clicked="OnLeoClicked"/>
+                <Label Text="Your AI Boyfriend. Always here for you. 💕"
+                       FontSize="20"
+                       TextColor="#67243A"
+                       HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
 
-        <Button Text="Noah - Calm &amp; Mature"
-        Clicked="OnNoahClicked"/>
-    </VerticalStackLayout>
+            <!-- Character cards -->
+            <Grid ColumnDefinitions="380,380,380"
+                  ColumnSpacing="24"
+                  HorizontalOptions="Center">
+
+                <!-- Ethan -->
+                <Border Grid.Column="0"
+                        WidthRequest="380"
+                        BackgroundColor="#FFEAF1"
+                        Stroke="#FFBCD2"
+                        StrokeThickness="2"
+                        Padding="0"
+                        StrokeShape="RoundRectangle 28">
+
+                    <VerticalStackLayout Spacing="0">
+
+                        <Border Margin="14,14,14,0"
+                                HeightRequest="420"
+                                WidthRequest="350"
+                                BackgroundColor="#FFEAF1"
+                                StrokeThickness="0"
+                                Padding="0"
+                                StrokeShape="RoundRectangle 20">
+
+                            <Image Source="ethan_profile.png"
+                                   HeightRequest="440"
+                                   WidthRequest="350"
+                                   Aspect="AspectFill"
+                                   HorizontalOptions="Fill"
+                                   VerticalOptions="Fill"/>
+                        </Border>
+
+                        <VerticalStackLayout Padding="20,16,20,20"
+                                             Spacing="8">
+
+                            <Label Text="Ethan 💗"
+                                   FontSize="34"
+                                   FontAttributes="Bold"
+                                   TextColor="#EA3975"/>
+
+                            <Label Text="Soft • Caring • Protective"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="#EA3975"/>
+
+                            <Label Text="A gentle boyfriend who comforts you and makes you feel loved."
+                                   FontSize="15"
+                                   TextColor="#40212B"
+                                   LineBreakMode="WordWrap"/>
+
+                            <Button Text="Choose Ethan"
+                                    HeightRequest="54"
+                                    Margin="0,8,0,0"
+                                    BackgroundColor="#EA3975"
+                                    TextColor="White"
+                                    FontSize="16"
+                                    FontAttributes="Bold"
+                                    CornerRadius="27"
+                                    Clicked="OnEthanClicked"/>
+                        </VerticalStackLayout>
+
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Leo -->
+                <Border Grid.Column="1"
+                        WidthRequest="380"
+                        BackgroundColor="#FFF1D9"
+                        Stroke="#FFD18A"
+                        StrokeThickness="2"
+                        Padding="0"
+                        StrokeShape="RoundRectangle 28">
+
+                    <VerticalStackLayout Spacing="0">
+
+                        <Border Margin="14,14,14,0"
+                                HeightRequest="420"
+                                WidthRequest="350"
+                                BackgroundColor="#FFF1D9"
+                                StrokeThickness="0"
+                                Padding="0"
+                                StrokeShape="RoundRectangle 20">
+
+                            <Image Source="leo_profile.png"
+                                   HeightRequest="500"
+                                   WidthRequest="350"
+                                   Aspect="AspectFill"
+                                   HorizontalOptions="Fill"
+                                   VerticalOptions="Fill"/>
+                        </Border>
+
+                        <VerticalStackLayout Padding="20,16,20,20"
+                                             Spacing="8">
+
+                            <Label Text="Leo 🧡"
+                                   FontSize="34"
+                                   FontAttributes="Bold"
+                                   TextColor="#F58A00"/>
+
+                            <Label Text="Bubbly • Playful • Flirty"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="#F58A00"/>
+
+                            <Label Text="A playful boyfriend who makes you laugh, teases you, and keeps every moment exciting."
+                                   FontSize="15"
+                                   TextColor="#40212B"
+                                   LineBreakMode="WordWrap"/>
+
+                            <Button Text="Choose Leo"
+                                    HeightRequest="54"
+                                    Margin="0,8,0,0"
+                                    BackgroundColor="#F58A00"
+                                    TextColor="White"
+                                    FontSize="16"
+                                    FontAttributes="Bold"
+                                    CornerRadius="27"
+                                    Clicked="OnLeoClicked"/>
+                        </VerticalStackLayout>
+
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Noah -->
+                <Border Grid.Column="2"
+                        WidthRequest="380"
+                        BackgroundColor="#E9F2FF"
+                        Stroke="#B9D8FF"
+                        StrokeThickness="2"
+                        Padding="0"
+                        StrokeShape="RoundRectangle 28">
+
+                    <VerticalStackLayout Spacing="0">
+
+                        <Border Margin="14,14,14,0"
+                                HeightRequest="420"
+                                WidthRequest="350"
+                                BackgroundColor="#E9F2FF"
+                                StrokeThickness="0"
+                                Padding="0"
+                                StrokeShape="RoundRectangle 20">
+
+                            <Image Source="noah_profile.png"
+                                   HeightRequest="460"
+                                   WidthRequest="350"
+                                   Aspect="AspectFill"
+                                   HorizontalOptions="Fill"
+                                   VerticalOptions="Fill"/>
+                        </Border>
+
+                        <VerticalStackLayout Padding="20,16,20,20"
+                                             Spacing="8">
+
+                            <Label Text="Noah 💙"
+                                   FontSize="34"
+                                   FontAttributes="Bold"
+                                   TextColor="#2575D9"/>
+
+                            <Label Text="Calm • Mature • Boss"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="#2575D9"/>
+
+                            <Label Text="A calm and mature boyfriend who listens, protects you, and makes you feel safe."
+                                   FontSize="15"
+                                   TextColor="#40212B"
+                                   LineBreakMode="WordWrap"/>
+
+                            <Button Text="Choose Noah"
+                                    HeightRequest="54"
+                                    Margin="0,8,0,0"
+                                    BackgroundColor="#2575D9"
+                                    TextColor="White"
+                                    FontSize="16"
+                                    FontAttributes="Bold"
+                                    CornerRadius="27"
+                                    Clicked="OnNoahClicked"/>
+                        </VerticalStackLayout>
+
+                    </VerticalStackLayout>
+                </Border>
+
+            </Grid>
+
+            <!-- Final sentence -->
+            <Border WidthRequest="820"
+                    Padding="17"
+                    HorizontalOptions="Center"
+                    BackgroundColor="#FFEAF1"
+                    Stroke="#FFC4D6"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 26">
+
+                <Label Text="💗 Each of them has a different personality, but they all care about you deeply. 💕"
+                       FontSize="18"
+                       TextColor="#67243A"
+                       HorizontalTextAlignment="Center"/>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
