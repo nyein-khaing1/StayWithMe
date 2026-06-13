@@ -1,0 +1,41 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StayWithMe.SignUpPage"
+             BackgroundColor="#FFF7F9">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="40" Spacing="16"
+                             WidthRequest="460"
+                             HorizontalOptions="Center">
+
+            <Label Text="Create Account"
+                   FontSize="42"
+                   FontAttributes="Bold"
+                   TextColor="#EA3975"
+                   HorizontalOptions="Center"/>
+
+            <Entry x:Name="NameEntry" Placeholder="Your name"/>
+            <Entry x:Name="EmailEntry" Placeholder="Email"/>
+            <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True"/>
+
+            <Picker x:Name="GenderPicker" Title="Gender">
+                <Picker.Items>
+                    <x:String>Female</x:String>
+                    <x:String>Male</x:String>
+                    <x:String>Other</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Label Text="Date of birth"/>
+            <DatePicker x:Name="DobPicker"/>
+
+            <Button Text="Continue"
+                    BackgroundColor="#EA3975"
+                    TextColor="White"
+                    CornerRadius="24"
+                    HeightRequest="52"
+                    Clicked="OnContinueClicked"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

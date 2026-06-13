@@ -1,0 +1,49 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StayWithMe.LoginPage"
+             BackgroundColor="#FFF7F9">
+
+    <VerticalStackLayout Padding="40" Spacing="18"
+                         WidthRequest="420"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center">
+
+        <Label Text="StayWithMe"
+               FontSize="48"
+               FontAttributes="Bold"
+               TextColor="#EA3975"
+               HorizontalOptions="Center"/>
+
+        <Label Text="Login to continue 💕"
+               FontSize="18"
+               TextColor="#67243A"
+               HorizontalOptions="Center"/>
+
+        <Entry x:Name="EmailEntry"
+               Placeholder="Email"/>
+
+        <Entry x:Name="PasswordEntry"
+               Placeholder="Password"
+               IsPassword="True"/>
+
+        <Button Text="Login"
+                BackgroundColor="#EA3975"
+                TextColor="White"
+                CornerRadius="24"
+                HeightRequest="52"
+                Clicked="OnLoginClicked"/>
+
+        <Button Text="Forgot password?"
+                BackgroundColor="Transparent"
+                TextColor="#EA3975"
+                Clicked="OnForgotPasswordClicked"/> 
+
+        <Button Text="Create account"
+                BackgroundColor="#FFEAF1"
+                TextColor="#EA3975"
+                CornerRadius="24"
+                HeightRequest="52"
+                Clicked="OnCreateAccountClicked"/>
+
+    </VerticalStackLayout>
+</ContentPage>

@@ -45,4 +45,9 @@ public partial class CharacterPage : ContentPage
             )
         );
     }
+
+    private async void OnSettingsClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new SettingsPage());
+    }
 }

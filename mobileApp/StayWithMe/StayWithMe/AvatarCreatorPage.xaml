@@ -1,0 +1,176 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StayWithMe.AvatarCreatorPage"
+             BackgroundColor="#FFF7F9">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="40" Spacing="30" HorizontalOptions="Center">
+
+            <Label Text="Choose Your Avatar"
+                   FontSize="44"
+                   FontAttributes="Bold"
+                   TextColor="#EA3975"
+                   HorizontalOptions="Center"/>
+
+            <Label Text="Pick the avatar that represents you best 💕"
+                   FontSize="18"
+                   TextColor="#67243A"
+                   HorizontalOptions="Center"/>
+
+            <Grid ColumnDefinitions="250,250,250,250,250"
+                  ColumnSpacing="22"
+                  HorizontalOptions="Center">
+
+                <!-- Asian -->
+                <Border Grid.Column="0"
+                        StyleId="female_avatar_asian.png"
+                        BackgroundColor="#FFEAF1"
+                        Stroke="#FFC4D6"
+                        StrokeThickness="2"
+                        Padding="0"
+                        StrokeShape="RoundRectangle 28">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAvatarSelected"/>
+                    </Border.GestureRecognizers>
+
+                    <VerticalStackLayout Spacing="0">
+                        <Image Source="female_avatar_asian.png"
+                               HeightRequest="345"
+                               Aspect="AspectFill"
+                               TranslationY="-35"/>
+
+                        <Label Text="Asian"
+                               Margin="0,-20,0,18"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#EA3975"
+                               HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- White -->
+                <Border Grid.Column="1"
+                        StyleId="female_avatar_white.png"
+                        BackgroundColor="#FFEAF1"
+                        Stroke="#FFC4D6"
+                        StrokeThickness="2"
+                        Padding="0"
+                        StrokeShape="RoundRectangle 28">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAvatarSelected"/>
+                    </Border.GestureRecognizers>
+
+                    <VerticalStackLayout Spacing="0">
+                        <Image Source="female_avatar_white.png"
+                               HeightRequest="345"
+                               Aspect="AspectFill"
+                               TranslationY="-35"/>
+
+                        <Label Text="White"
+                               Margin="0,-20,0,18"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#EA3975"
+                               HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Black -->
+                <Border Grid.Column="2"
+                        StyleId="female_avatar_black.png"
+                        BackgroundColor="#FFEAF1"
+                        Stroke="#FFC4D6"
+                        StrokeThickness="2"
+                        Padding="0"
+                        StrokeShape="RoundRectangle 28">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAvatarSelected"/>
+                    </Border.GestureRecognizers>
+
+                    <VerticalStackLayout Spacing="0">
+                        <Image Source="female_avatar_black.png"
+                               HeightRequest="320"
+                               Aspect="AspectFill"
+                               TranslationY="-10"/>
+
+                        <Label Text="Black"
+                               Margin="0,8,0,18"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#EA3975"
+                               HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Latina -->
+                <Border Grid.Column="3"
+                        StyleId="female_avatar_latina.png"
+                        BackgroundColor="#FFEAF1"
+                        Stroke="#FFC4D6"
+                        StrokeThickness="2"
+                        Padding="0"
+                        StrokeShape="RoundRectangle 28">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAvatarSelected"/>
+                    </Border.GestureRecognizers>
+
+                    <VerticalStackLayout Spacing="0">
+                        <Image Source="female_avatar_latina.png"
+                               HeightRequest="320"
+                               Aspect="AspectFill"
+                               TranslationY="-10"/>
+
+                        <Label Text="Latina"
+                               Margin="0,8,0,18"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#EA3975"
+                               HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Middle Eastern -->
+                <Border Grid.Column="4"
+                        StyleId="female_avatar_middle_eastern.png"
+                        BackgroundColor="#FFEAF1"
+                        Stroke="#FFC4D6"
+                        StrokeThickness="2"
+                        Padding="0"
+                        StrokeShape="RoundRectangle 28">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAvatarSelected"/>
+                    </Border.GestureRecognizers>
+
+                    <VerticalStackLayout Spacing="0">
+                        <Image Source="female_avatar_middle_eastern.png"
+                               HeightRequest="345"
+                               Aspect="AspectFill"
+                               TranslationY="-35"/>
+
+                        <Label Text="Middle Eastern"
+                               Margin="0,-20,0,18"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="#EA3975"
+                               HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+
+            </Grid>
+
+            <Label x:Name="SelectedAvatarLabel"
+                   IsVisible="False"/>
+
+            <Button Text="Continue"
+                    WidthRequest="380"
+                    HeightRequest="58"
+                    BackgroundColor="#EA3975"
+                    TextColor="White"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    CornerRadius="29"
+                    Clicked="OnContinueClicked"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

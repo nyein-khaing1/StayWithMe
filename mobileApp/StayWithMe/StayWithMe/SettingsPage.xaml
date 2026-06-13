@@ -1,0 +1,55 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StayWithMe.SettingsPage"
+             BackgroundColor="#FFF7F9">
+
+    <VerticalStackLayout Padding="40" Spacing="18"
+                         WidthRequest="450"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center">
+
+        <Label Text="Settings"
+               FontSize="42"
+               FontAttributes="Bold"
+               TextColor="#EA3975"
+               HorizontalOptions="Center"/>
+
+        <Label x:Name="UserInfoLabel"
+               FontSize="16"
+               TextColor="#67243A"
+               HorizontalOptions="Center"/>
+
+        <Button Text="Change Avatar"
+                BackgroundColor="#FFEAF1"
+                TextColor="#EA3975"
+                CornerRadius="24"
+                HeightRequest="52"
+                Clicked="OnChangeAvatarClicked"/>
+
+        <Entry x:Name="NewPasswordEntry"
+               Placeholder="New password"
+               IsPassword="True"/>
+
+        <Button Text="Change Password"
+                BackgroundColor="#EA3975"
+                TextColor="White"
+                CornerRadius="24"
+                HeightRequest="52"
+                Clicked="OnChangePasswordClicked"/>
+
+        <Button Text="Back to Home"
+                BackgroundColor="#7B68EE"
+                TextColor="White"
+                CornerRadius="24"
+                HeightRequest="52"
+                Clicked="OnBackToHomeClicked"/> 
+
+        <Button Text="Logout"
+                BackgroundColor="#333333"
+                TextColor="White"
+                CornerRadius="24"
+                HeightRequest="52"
+                Clicked="OnLogoutClicked"/>
+
+    </VerticalStackLayout>
+</ContentPage>
