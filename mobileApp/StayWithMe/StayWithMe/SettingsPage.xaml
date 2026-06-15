@@ -2,6 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StayWithMe.SettingsPage"
              BackgroundColor="#FFF7F9">
+    
+    
+    
 
     <VerticalStackLayout Padding="40" Spacing="18"
                          WidthRequest="450"
@@ -9,15 +12,29 @@
                          VerticalOptions="Center">
 
         <Label Text="Settings"
-               FontSize="42"
-               FontAttributes="Bold"
-               TextColor="#EA3975"
-               HorizontalOptions="Center"/>
+                   FontSize="42"
+                   FontAttributes="Bold"
+                   TextColor="#EA3975"
+                   HorizontalOptions="Center"/>
+
+        <Image x:Name="UserAvatarImage"
+                   WidthRequest="130"
+                   HeightRequest="130"
+                   Aspect="AspectFill"
+                   HorizontalOptions="Center">          
+
+            <Image.Clip>
+                <EllipseGeometry Center="65,65"
+                         RadiusX="65"
+                         RadiusY="65"/>
+            </Image.Clip>
+
+        </Image>
 
         <Label x:Name="UserInfoLabel"
-               FontSize="16"
-               TextColor="#67243A"
-               HorizontalOptions="Center"/>
+       FontSize="16"
+       TextColor="#67243A"
+       HorizontalOptions="Center"/>
 
         <Button Text="Change Avatar"
                 BackgroundColor="#FFEAF1"

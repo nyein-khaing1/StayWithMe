@@ -272,10 +272,35 @@ public partial class MainPage : ContentPage
 
         if (isUser)
         {
-            bubble.HorizontalOptions =
-                LayoutOptions.End;
+            var userAvatar = new Image
+            {
+                Source = UserSession.UserAvatarImage,
+                WidthRequest = 42,
+                HeightRequest = 42,
+                Aspect = Aspect.AspectFill,
+                VerticalOptions = LayoutOptions.Start
+            };
 
-            ChatContainer.Children.Add(bubble);
+            userAvatar.Clip = new EllipseGeometry
+            {
+                Center = new Point(21, 21),
+                RadiusX = 21,
+                RadiusY = 21
+            };
+
+            var userRow = new HorizontalStackLayout
+            {
+                Spacing = 10,
+                HorizontalOptions = LayoutOptions.End,
+                MaximumWidthRequest = 510
+            };
+
+            bubble.HorizontalOptions = LayoutOptions.End;
+
+            userRow.Children.Add(bubble);
+            userRow.Children.Add(userAvatar);
+
+            ChatContainer.Children.Add(userRow);
 
             return;
         }

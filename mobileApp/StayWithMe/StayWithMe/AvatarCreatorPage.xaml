@@ -22,7 +22,8 @@
                   HorizontalOptions="Center">
 
                 <!-- Asian -->
-                <Border Grid.Column="0"
+                <Border x:Name="AsianCard"
+                        Grid.Column="0"
                         StyleId="female_avatar_asian.png"
                         BackgroundColor="#FFEAF1"
                         Stroke="#FFC4D6"
@@ -35,12 +36,12 @@
 
                     <VerticalStackLayout Spacing="0">
                         <Image Source="female_avatar_asian.png"
-                               HeightRequest="345"
+                               HeightRequest="320"
                                Aspect="AspectFill"
-                               TranslationY="-35"/>
+                               TranslationY="-10"/>
 
                         <Label Text="Asian"
-                               Margin="0,-20,0,18"
+                               Margin="0,8,0,18"
                                FontSize="24"
                                FontAttributes="Bold"
                                TextColor="#EA3975"
@@ -49,7 +50,8 @@
                 </Border>
 
                 <!-- White -->
-                <Border Grid.Column="1"
+                <Border x:Name="WhiteCard"
+                        Grid.Column="1"
                         StyleId="female_avatar_white.png"
                         BackgroundColor="#FFEAF1"
                         Stroke="#FFC4D6"
@@ -62,12 +64,12 @@
 
                     <VerticalStackLayout Spacing="0">
                         <Image Source="female_avatar_white.png"
-                               HeightRequest="345"
+                               HeightRequest="320"
                                Aspect="AspectFill"
-                               TranslationY="-35"/>
+                               TranslationY="-10"/>
 
                         <Label Text="White"
-                               Margin="0,-20,0,18"
+                               Margin="0,8,0,18"
                                FontSize="24"
                                FontAttributes="Bold"
                                TextColor="#EA3975"
@@ -76,7 +78,8 @@
                 </Border>
 
                 <!-- Black -->
-                <Border Grid.Column="2"
+                <Border x:Name="BlackCard"
+                        Grid.Column="2"
                         StyleId="female_avatar_black.png"
                         BackgroundColor="#FFEAF1"
                         Stroke="#FFC4D6"
@@ -103,7 +106,8 @@
                 </Border>
 
                 <!-- Latina -->
-                <Border Grid.Column="3"
+                <Border x:Name="LatinaCard"
+                        Grid.Column="3"
                         StyleId="female_avatar_latina.png"
                         BackgroundColor="#FFEAF1"
                         Stroke="#FFC4D6"
@@ -130,7 +134,8 @@
                 </Border>
 
                 <!-- Middle Eastern -->
-                <Border Grid.Column="4"
+                <Border x:Name="MiddleEasternCard"
+                        Grid.Column="4"
                         StyleId="female_avatar_middle_eastern.png"
                         BackgroundColor="#FFEAF1"
                         Stroke="#FFC4D6"
@@ -143,12 +148,12 @@
 
                     <VerticalStackLayout Spacing="0">
                         <Image Source="female_avatar_middle_eastern.png"
-                               HeightRequest="345"
+                               HeightRequest="320"
                                Aspect="AspectFill"
-                               TranslationY="-35"/>
+                               TranslationY="-10"/>
 
                         <Label Text="Middle Eastern"
-                               Margin="0,-20,0,18"
+                               Margin="0,8,0,18"
                                FontSize="20"
                                FontAttributes="Bold"
                                TextColor="#EA3975"

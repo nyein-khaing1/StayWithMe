@@ -6,7 +6,18 @@ public partial class SettingsPage : ContentPage
     {
         InitializeComponent();
 
-        UserInfoLabel.Text = $"{UserSession.Name} • {UserSession.Email}";
+        LoadUserProfile();
+    }
+
+    private void LoadUserProfile()
+    {
+        UserInfoLabel.Text =
+            $"Welcome back, {UserSession.Name} 💕";
+
+        if (!string.IsNullOrWhiteSpace(UserSession.UserAvatarImage))
+        {
+            UserAvatarImage.Source = UserSession.UserAvatarImage;
+        }
     }
 
     private async void OnChangeAvatarClicked(object sender, EventArgs e)
@@ -41,7 +52,5 @@ public partial class SettingsPage : ContentPage
     private async void OnBackToHomeClicked(object sender, EventArgs e)
     {
         await Navigation.PopAsync();
-            UserInfoLabel.Text =
-        $"{UserSession.Name} • {UserSession.Email}";
     }
 }
