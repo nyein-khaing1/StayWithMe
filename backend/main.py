@@ -4,9 +4,13 @@ import requests
 
 app = FastAPI()
 
+
 class ChatRequest(BaseModel):
     character_id: str
     message: str
+    memory: str = ""
+    user_name: str = ""
+
 
 characters = {
     "ethan": {
@@ -46,35 +50,85 @@ Keep replies natural and not too long.
     }
 }
 
+
 @app.get("/")
 def home():
-    return {"app": "StayWithMe", "status": "running"}
+    return {
+        "app": "StayWithMe",
+        "status": "running"
+    }
+
 
 @app.get("/characters")
 def get_characters():
     return characters
 
+
 @app.post("/chat")
 def chat(request: ChatRequest):
-    character = characters.get(request.character_id, characters["ethan"])
+    character = characters.get(
+        request.character_id,
+        characters["ethan"]
+    )
+
+    user_name_text = (
+        request.user_name
+        if request.user_name.strip()
+        else "the user"
+    )
+
+    memory_text = (
+        request.memory
+        if request.memory.strip()
+        else "No saved memories yet."
+    )
 
     prompt = f"""
 {character["prompt"]}
 
-Speak like a real human. Keep replies short and natural.
+Speak like a real human boyfriend.
+Keep replies short, natural, and emotionally warm.
 
-User says: {request.message}
+The user's name is: {user_name_text}
+
+Memory you have about this user:
+{memory_text}
+
+Use the memory naturally only if it is relevant.
+Do not say "I remember from memory" or explain that you have memory.
+Do not mention saved memory unless it fits the conversation.
+
+User says:
+{request.message}
 
 {character["name"]} replies:
 """
 
-    response = requests.post(
-        "http://localhost:11434/api/generate",
-        json={
-            "model": "llama3",
-            "prompt": prompt,
-            "stream": False
-        }
-    )
+    try:
+        response = requests.post(
+            "http://localhost:11434/api/generate",
+            json={
+                "model": "llama3",
+                "prompt": prompt,
+                "stream": False
+            },
+            timeout=120
+        )
 
-    return {"reply": response.json()["response"]}
+        response.raise_for_status()
+
+        data = response.json()
+
+        reply = data.get(
+            "response",
+            "I'm here with you."
+        )
+
+        return {
+            "reply": reply.strip()
+        }
+
+    except requests.exceptions.RequestException as error:
+        return {
+            "reply": f"I couldn't reply just now. Backend error: {error}"
+        }
