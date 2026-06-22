@@ -42,6 +42,11 @@ public partial class SettingsPage : ContentPage
         NewPasswordEntry.Text = "";
     }
 
+    private async void OnChatHistoryClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new ChatHistoryPage());
+    }
+
     private void OnLogoutClicked(object sender, EventArgs e)
     {
         UserSession.Logout();

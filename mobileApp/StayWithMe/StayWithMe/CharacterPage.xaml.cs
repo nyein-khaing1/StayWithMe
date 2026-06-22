@@ -50,4 +50,7 @@ public partial class CharacterPage : ContentPage
     {
         await Navigation.PushAsync(new SettingsPage());
     }
+
+   
 }
+

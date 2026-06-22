@@ -24,13 +24,15 @@
                        HorizontalTextAlignment="Center"/>
             </VerticalStackLayout>
 
+
+
             <Button Text="Settings"
-                WidthRequest="140"
-                HorizontalOptions="Center"
-                BackgroundColor="#FFEAF1"
-                TextColor="#EA3975"
-                CornerRadius="22"
-                Clicked="OnSettingsClicked"/>   
+                    WidthRequest="140"
+                    HorizontalOptions="Center"
+                    BackgroundColor="#FFEAF1"
+                    TextColor="#EA3975"
+                    CornerRadius="22"
+                    Clicked="OnSettingsClicked"/>
 
             <!-- Character cards -->
             <Grid ColumnDefinitions="380,380,380"

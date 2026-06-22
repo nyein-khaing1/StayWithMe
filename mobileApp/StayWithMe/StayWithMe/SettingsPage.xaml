@@ -59,7 +59,14 @@
                 TextColor="White"
                 CornerRadius="24"
                 HeightRequest="52"
-                Clicked="OnBackToHomeClicked"/> 
+                Clicked="OnBackToHomeClicked"/>
+
+        <Button Text="Chat History"
+            BackgroundColor="#FFEAF1"
+            TextColor="#EA3975"
+            CornerRadius="24"
+            HeightRequest="52"
+            Clicked="OnChatHistoryClicked"/>
 
         <Button Text="Logout"
                 BackgroundColor="#333333"

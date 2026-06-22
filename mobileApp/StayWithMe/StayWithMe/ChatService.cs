@@ -30,7 +30,9 @@ public class ChatService
         var requestData = new
         {
             character_id = characterId,
-            message
+            message,
+            memory = UserSession.GetMemory(characterId),
+            user_name = UserSession.Name
         };
 
         string requestJson =

@@ -1,0 +1,43 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StayWithMe.MemoryPage"
+             BackgroundColor="#FFF7F9">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="35" Spacing="18">
+
+            <Label x:Name="TitleLabel"
+                   FontSize="38"
+                   FontAttributes="Bold"
+                   TextColor="#EA3975"
+                   HorizontalOptions="Center"/>
+
+            <Border Padding="20"
+                    BackgroundColor="#FFFFFF"
+                    Stroke="#FFC4D6"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 26">
+
+                <Label x:Name="MemoryLabel"
+                       FontSize="16"
+                       TextColor="#3D1A25"
+                       LineBreakMode="WordWrap"/>
+            </Border>
+
+            <Button Text="Clear Memories"
+                    BackgroundColor="#333333"
+                    TextColor="White"
+                    CornerRadius="24"
+                    HeightRequest="52"
+                    Clicked="OnClearMemoriesClicked"/>
+
+            <Button Text="Back"
+                    BackgroundColor="#EA3975"
+                    TextColor="White"
+                    CornerRadius="24"
+                    HeightRequest="52"
+                    Clicked="OnBackClicked"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,36 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StayWithMe.ChatHistoryPage"
+             BackgroundColor="#FFF7F9">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="35" Spacing="18">
+
+            <Label Text="Chat History"
+                   FontSize="42"
+                   FontAttributes="Bold"
+                   TextColor="#EA3975"
+                   HorizontalOptions="Center"/>
+
+            <Label x:Name="HistoryLabel"
+                   FontSize="15"
+                   TextColor="#3D1A25"
+                   LineBreakMode="WordWrap"/>
+
+            <Button Text="Clear History"
+                    BackgroundColor="#333333"
+                    TextColor="White"
+                    CornerRadius="24"
+                    HeightRequest="52"
+                    Clicked="OnClearHistoryClicked"/>
+
+            <Button Text="Back"
+                    BackgroundColor="#EA3975"
+                    TextColor="White"
+                    CornerRadius="24"
+                    HeightRequest="52"
+                    Clicked="OnBackClicked"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
